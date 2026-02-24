@@ -32,7 +32,7 @@ class RDFItemStore:
         return item_uri
 
     def rdf_to_item(self, item_uri: URIRef, item):
-        #Syncs the processed RDF values back into the legacy Item object.
+        #Syncs the processed RDF values back into the Item object.
         item.sell_in = int(self.graph.value(item_uri, GR.sellIn))
         item.quality = int(self.graph.value(item_uri, GR.quality))
 
