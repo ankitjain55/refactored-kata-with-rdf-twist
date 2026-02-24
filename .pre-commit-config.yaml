@@ -1,10 +1,14 @@
 repos:
-  - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.15.1
+  - repo: local
     hooks:
-      # Lint (with auto-fix)
       - id: ruff-check
-        args: [--fix]
+        name: Ruff (lint)
+        entry: uv run ruff check --fix python/
+        language: system
+        pass_filenames: false
 
-      # Format (Black-compatible formatter)
       - id: ruff-format
+        name: Ruff (format)
+        entry: uv run ruff format python/
+        language: system
+        pass_filenames: false

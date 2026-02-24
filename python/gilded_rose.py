@@ -1,5 +1,6 @@
 from rdf_store import RDFItemStore
 
+
 class GildedRose(object):
     def __init__(self, items):
         self.items = items
@@ -14,6 +15,7 @@ class GildedRose(object):
         # 2. Sync RDF results back to Item objects
         for i, item in enumerate(self.items):
             self.store.rdf_to_item(self.uris[i], item)
+
 
 class Item:
     def __init__(self, name, sell_in, quality):

@@ -6,6 +6,7 @@ import os
 GR = Namespace("http://example.org/gilded-rose#")
 INST = Namespace("http://example.org/gilded-rose/items/")
 
+
 class RDFItemStore:
     def __init__(self):
         self.graph = Graph()
@@ -13,13 +14,13 @@ class RDFItemStore:
         self._load_schema()
 
     def _load_schema(self):
-        #Load schema.ttl
+        # Load schema.ttl
         schema_path = "schema.ttl"
         if os.path.exists(schema_path):
             self.graph.parse(schema_path, format="turtle")
 
     def item_to_rdf(self, item, item_id: int) -> URIRef:
-        #Extracts data from Item class into RDF triples.
+        # Extracts data from Item class into RDF triples.
         item_uri = INST[f"item_{item_id}"]
 
         self.graph.add((item_uri, RDF.type, GR.Item))
@@ -27,12 +28,12 @@ class RDFItemStore:
         self.graph.add((item_uri, GR.sellIn, Literal(item.sell_in, datatype=XSD.integer)))
         self.graph.add((item_uri, GR.quality, Literal(item.quality, datatype=XSD.integer)))
 
-        #Link the item to its semantic type for logic processing
+        # Link the item to its semantic type for logic processing
         self.graph.add((item_uri, GR.itemType, self._determine_item_type(item.name)))
         return item_uri
 
     def rdf_to_item(self, item_uri: URIRef, item):
-        #Syncs the processed RDF values back into Item object.
+        # Syncs the processed RDF values back into Item object.
         item.sell_in = int(self.graph.value(item_uri, GR.sellIn))
         item.quality = int(self.graph.value(item_uri, GR.quality))
 
@@ -67,14 +68,14 @@ class RDFItemStore:
                     q += 1
             elif itype == GR.ConjuredItem:
                 q = q - 2 if s >= 0 else q - 4
-            elif itype != GR.Sulfuras: #Normal Items
+            elif itype != GR.Sulfuras:  # Normal Items
                 q = q - 1 if s >= 0 else q - 2
 
-            #Enforce bounds (Sulfuras is always 80)
+            # Enforce bounds (Sulfuras is always 80)
             if itype != GR.Sulfuras:
                 q = max(0, min(50, q))
 
-            #Update the Triple Store
+            # Update the Triple Store
             self.graph.set((uri, GR.sellIn, Literal(s, datatype=XSD.integer)))
             self.graph.set((uri, GR.quality, Literal(q, datatype=XSD.integer)))
 

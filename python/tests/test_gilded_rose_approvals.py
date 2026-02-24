@@ -4,6 +4,7 @@ import sys
 from approvaltests import verify
 from texttest_fixture import main
 
+
 def test_gilded_rose_approvals():
     orig_sysout = sys.stdout
     try:
@@ -16,6 +17,7 @@ def test_gilded_rose_approvals():
         sys.stdout = orig_sysout
 
     verify(answer)
+
 
 if __name__ == "__main__":
     test_gilded_rose_approvals()
