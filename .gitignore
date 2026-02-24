@@ -1,0 +1,37 @@
+*.swp
+package-lock.json
+__pycache__
+.pytest_cache
+.venv
+*.egg-info
+
+# Environment variable files
+.env
+.env.*
+
+# Coverage artifacts
+.coverage
+htmlcov/
+
+*.pyc
+.cache
+.idea/
+*.iml
+
+# RDF output files (candidates may generate these during development)
+*.ttl
+*.rdf
+*.nt
+*.n3
+*.jsonld
+*.trig
+*.nq
+!python/schema.ttl
+
+# ApprovalTests received files (generated during test runs)
+*.received.*
+
+# Candidate AI conversation logs
+ai-conversation.*
+ai-dialogue.*
+conversation-history.*

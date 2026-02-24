@@ -1,0 +1,59 @@
+@prefix gr: <http://example.org/gilded-rose#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Classes
+gr:Item a rdfs:Class ;
+    rdfs:label "Item" ;
+    rdfs:comment "An item in the Gilded Rose inventory" .
+
+gr:ItemType a rdfs:Class ;
+    rdfs:label "Item Type" ;
+    rdfs:comment "A category of items with specific update rules" .
+
+# Properties
+gr:name a rdf:Property ;
+    rdfs:domain gr:Item ;
+    rdfs:range xsd:string ;
+    rdfs:label "name" .
+
+gr:sellIn a rdf:Property ;
+    rdfs:domain gr:Item ;
+    rdfs:range xsd:integer ;
+    rdfs:label "sell in" ;
+    rdfs:comment "Number of days to sell the item" .
+
+gr:quality a rdf:Property ;
+    rdfs:domain gr:Item ;
+    rdfs:range xsd:integer ;
+    rdfs:label "quality" ;
+    rdfs:comment "Quality value of the item" .
+
+gr:itemType a rdf:Property ;
+    rdfs:domain gr:Item ;
+    rdfs:range gr:ItemType ;
+    rdfs:label "item type" .
+
+# Item Types (examples - you may need to add more)
+gr:NormalItem a gr:ItemType ;
+    rdfs:label "Normal Item" ;
+    rdfs:comment "Standard items that degrade in quality" .
+
+gr:AgedBrie a gr:ItemType ;
+    rdfs:label "Aged Brie" ;
+    rdfs:comment "Increases in quality over time" .
+
+gr:Sulfuras a gr:ItemType ;
+    rdfs:label "Sulfuras" ;
+    rdfs:comment "Legendary item that never changes" .
+
+gr:BackstagePass a gr:ItemType ;
+    rdfs:label "Backstage Pass" ;
+    rdfs:comment "Increases in quality as concert approaches, drops to 0 after" .
+
+# TODO: Add Conjured item type and any additional properties needed for business rules
+# Add to Item Types section
+gr:ConjuredItem a gr:ItemType ;
+    rdfs:label "Conjured Item" ;
+    rdfs:comment "Degrades in quality twice as fast as normal items" .

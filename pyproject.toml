@@ -1,0 +1,41 @@
+[project]
+name = "kata-with-rdf-twist"
+version = "0.1.0"
+description = ""
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "rdflib>=7.0.0",
+]
+
+[dependency-groups]
+dev = [
+    "approvaltests>=14.0.0",
+    "pytest==8.3.3",
+    "pytest-cov>=4.1.0",
+    "ruff>=0.3.0"
+]
+
+[tool.isort]
+profile = "black"
+line_length = 120
+
+[tool.black]
+line-length = 120
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "W"]  # PEP8 errors, warnings, and pyflakes
+ignore = ["E501"]  # Line too long (handled by formatter)
+
+[tool.pylint.format]
+max-line-length = 120
+
+[tool.flake8]
+max-line-length = 120
+extend-ignore = ["E203", "W503"]
+
+[tool.autopep8]
+max_line_length = 120
